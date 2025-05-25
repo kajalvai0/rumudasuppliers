@@ -1,0 +1,43 @@
+backend:
+  name: git-gateway        # or github if you prefer OAuth
+  branch: gh-pages         # the branch where your content lives
+
+media_folder: "static/uploads"   # where uploaded images go
+public_folder: "/uploads"
+
+# Define one collection per “component” you want to edit.
+collections:
+  - name: "header"
+    label: "Site Header"
+    folder: "_data/header"        # you’ll create this
+    create: true
+    format: yaml
+    fields:
+      - { label: "Logo URL", name: "logo", widget: "image" }
+      - { label: "Navigation Links", name: "nav", widget: "list", fields: [
+            { label: "Label", name: "label", widget: "string" },
+            { label: "URL",   name: "url",   widget: "string" }
+        ] }
+
+  - name: "hero"
+    label: "Hero Section"
+    files:
+      - label: "Homepage Hero"
+        name: "homepage"
+        file: "_data/hero/homepage.yaml"
+        fields:
+          - { label: "Title", name: "title", widget: "string" }
+          - { label: "Subtitle", name: "subtitle", widget: "text" }
+          - { label: "Background Image", name: "bgImage", widget: "image" }
+
+  - name: "products"
+    label: "Products"
+    folder: "_data/products"
+    create: true
+    format: yaml
+    slug: "{{slug}}"
+    fields:
+      - { label: "Name", name: "name", widget: "string" }
+      - { label: "Price", name: "price", widget: "number" }
+      - { label: "Image", name: "image", widget: "image" }
+      - { label: "Description", name: "description", widget: "markdown" }
